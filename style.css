@@ -1,111 +1,249 @@
-
 body {
   margin: 0;
   font-family: 'EB Garamond', serif;
-  background: linear-gradient(to bottom, #f3f3f3, #e3e3e3);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   color: #2e2e2e;
   overflow-x: hidden;
+  line-height: 1.6;
 }
+
 main {
   padding: 0;
   margin: 0;
 }
+
 .hero {
   padding: 80px 20px;
   text-align: center;
-  background: #eaeaea;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  font-weight: 500;
 }
+
 .hero p {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3vw, 1.3rem);
   color: #555;
-  margin: 10px 0;
+  margin: 15px 0;
+  max-width: 600px;
 }
+
+/* Smooth typewriter effect */
 .typewriter {
+  display: inline-block;
   overflow: hidden;
-  border-right: .15em solid #555;
+  border-right: 3px solid #555;
   white-space: nowrap;
-  animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+  width: 0;
+  animation: 
+    typing 4s steps(40, end) forwards,
+    blink 1s step-end infinite;
 }
+
 @keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+  0% { width: 0; }
+  100% { width: 100%; }
 }
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: #555 }
+
+@keyframes blink {
+  0%, 50% { border-color: #555; }
+  51%, 100% { border-color: transparent; }
 }
+
 .fade-in {
   opacity: 0;
-  animation: fadeIn 3s ease-in forwards;
+  transform: translateY(20px);
+  animation: fadeInUp 2s ease-out forwards;
 }
+
 .fade-in.delay {
-  animation-delay: 2s;
+  animation-delay: 3s;
 }
-@keyframes fadeIn {
+
+@keyframes fadeInUp {
   to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
+
 .apology-letter {
   max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  font-size: 1.2rem;
+  margin: 60px auto;
+  padding: 40px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   line-height: 1.8;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.05);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .apology-letter em {
-  color: #aa0000;
+  color: #d63384;
+  font-weight: 500;
 }
+
 .constellation-section {
   position: relative;
-  height: 400px;
-  background: black;
+  height: 500px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 #starCanvas {
   width: 100%;
   height: 100%;
   display: block;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
+
+#starCanvas:hover {
+  opacity: 0.8;
+}
+
 #constellationText {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   width: 100%;
   text-align: center;
   font-size: 1.2rem;
-  color: white;
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.8);
   font-family: 'EB Garamond', serif;
+  pointer-events: none;
+  transition: all 0.5s ease;
 }
+
+#constellationText.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 .ai-letter-section {
-  padding: 40px 20px;
+  padding: 60px 20px;
   text-align: center;
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
 }
+
 .ai-letter-section h2 {
   font-family: 'EB Garamond', serif;
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  margin-bottom: 30px;
+  color: #333;
+  font-weight: 500;
+}
+
+#userEmotion {
+  padding: 15px 20px;
+  width: 90%;
+  max-width: 500px;
+  border: 2px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-family: 'EB Garamond', serif;
+  background: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
   margin-bottom: 20px;
 }
-#userEmotion {
-  padding: 10px;
-  width: 80%;
-  max-width: 400px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+
+#userEmotion:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
-#emotionResponse {
-  margin-top: 20px;
-  font-style: italic;
-  color: #3a3a3a;
+
+button {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
   font-size: 1.1rem;
+  font-family: 'EB Garamond', serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#emotionResponse {
+  margin-top: 30px;
+  font-style: italic;
+  color: #555;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+#emotionResponse.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Heart animation for constellation reveal */
+.heart-message {
+  color: #ff6b9d;
+  font-size: 2.5rem;
+  text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero {
+    padding: 60px 15px;
+  }
+  
+  .apology-letter {
+    margin: 40px 15px;
+    padding: 25px;
+  }
+  
+  .constellation-section {
+    height: 350px;
+  }
+  
+  .ai-letter-section {
+    padding: 40px 15px;
+  }
 }
